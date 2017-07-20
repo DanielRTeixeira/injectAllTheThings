@@ -34,7 +34,7 @@ Needless to say, to be on the safe side, always use injectAllTheThings_32.exe to
 
 Compile for 32 and 64 bits, with our without debugging and have fun.
 
-**For more information visit**: http://blog.deniable.oerg/blog/2017/07/16/inject-all-the-things/
+**For more information visit**: http://blog.deniable.org/blog/2017/07/16/inject-all-the-things/
 
 ### Issues
 
