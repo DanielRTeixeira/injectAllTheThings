@@ -19,10 +19,10 @@ DWORD wmain(int argc, wchar_t* argv[])
 
 	if (_wcsicmp(argv[1], TEXT("-t")) == 0)
 	{
-		strProcName = (wchar_t *)malloc((wcslen(argv[1]) + 1) * sizeof(wchar_t));
+		strProcName = (wchar_t *)malloc((wcslen(argv[3]) + 1) * sizeof(wchar_t));
 		strProcName = argv[3];
 
-		pszLibFile = (wchar_t *)malloc((wcslen(argv[2]) + 1) * sizeof(wchar_t));
+		pszLibFile = (wchar_t *)malloc((wcslen(argv[4]) + 1) * sizeof(wchar_t));
 		pszLibFile = argv[4];
 
 		dwProcessId = findPidByName(strProcName);
