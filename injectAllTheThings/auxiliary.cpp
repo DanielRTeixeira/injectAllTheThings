@@ -105,3 +105,37 @@ DWORD getThreadID(DWORD pid)
 	CloseHandle(h);
 	return (DWORD)0;
 }
+
+// in case you want to play with system-level processes
+BOOL SetSePrivilege() 
+{
+	TOKEN_PRIVILEGES tp = { 0 };
+	HANDLE hToken = NULL;
+
+	if (OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken)) {
+		tp.PrivilegeCount = 1;
+		tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+
+		if (LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &tp.Privileges[0].Luid)) {
+			if (AdjustTokenPrivileges(hToken, FALSE, &tp, 0, NULL, NULL) == 0) {
+				wprintf(TEXT("[-] Error: AdjustTokenPrivilege failed! %u\n"), GetLastError());
+
+				if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
+				{
+					wprintf(TEXT("[*] Warning: The token does not have the specified privilege.\n"));
+					return FALSE;
+				}
+			}
+#ifdef _DEBUG
+			else
+				wprintf(TEXT("[+] SeDebugPrivilege Enabled.\n"));
+#endif
+		}
+
+		CloseHandle(hToken);
+	}
+	else
+		return FALSE;
+
+	return TRUE;
+}

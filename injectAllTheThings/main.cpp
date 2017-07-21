@@ -31,6 +31,8 @@ DWORD wmain(int argc, wchar_t* argv[])
 			wprintf(TEXT("[-] Error: Could not find PID (%d).\n"), dwProcessId);
 			return(1);
 		}
+
+                SetSePrivilege();
 		
 		switch (_wtoi(argv[2]))
 		{
